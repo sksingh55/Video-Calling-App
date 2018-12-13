@@ -105,9 +105,7 @@ console.log(my_number.innerHTML);
 my_link.href        = location.href.split('?')[0] + '?call=' + number;
 my_link.innerHTML   = my_link.href;
 
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-// Update Location if Not Set
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
 if (!('number' in urlargs)) {
     console.log("this is running");
     urlargs.number = my_number.number;
@@ -115,9 +113,7 @@ if (!('number' in urlargs)) {
     return;
 }
 
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-// Get URL Params
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
 function urlparams() {
     console.log("first")
     var params = {};
@@ -137,18 +133,14 @@ function urlparams() {
     return params;
 }
 
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-// Construct URL Param String
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
 function urlstring(params) {
     return location.href.split('?')[0] + '?' + PUBNUB.map(
         params, function( key, val) { return key + '=' + val }
     ).join('&');
 }
 
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 // Calling & Answering Service
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 var video_out = PUBNUB.$('video-display');
 console.log("entering video")
 var img_out   = PUBNUB.$('video-thumbnail');
@@ -163,9 +155,7 @@ var phone     = window.phone = PHONE({
 ,   secure        : true, ssl: true
 });
 
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 // Video Session Connected
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 function connected(session) {
     video_out.innerHTML = '';
     video_out.appendChild(session.video);
@@ -175,9 +165,7 @@ function connected(session) {
     console.log("Hi!");
 }
 
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-// Video Session Ended
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// video end
 function ended(session) {
     clearInterval(thumbnail.ival);
     thumbnail.ival = 0;
@@ -187,17 +175,12 @@ function ended(session) {
     console.log("Bye!");
 }
 
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-// Video Session Ended
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 function set_icon(icon) {
     video_out.innerHTML = '<span class="glyphicon glyphicon-' +
         icon + '"></span>';
 }
 
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-// Start Phone Call
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//connecting
 function dial(number) {
     // Dial Number
     var session = phone.dial(number);
@@ -209,9 +192,7 @@ function dial(number) {
     set_icon('send');
 }
 
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 // Ready to Send or Receive Calls
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 phone.ready(function(){
     // Ready To Call
     set_icon('facetime-video');
